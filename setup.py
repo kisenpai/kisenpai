@@ -8,16 +8,16 @@ setup(
     packages=['kisenpai'],
     version='0.8',
     license='gpl-3.0',
-    description='A simple framework for feature engineering',
+    description='A simple framework for features engineering',
     long_description=readme,
     long_description_content_type="text/markdown",
     author='Pascal Zoleko',
     author_email='kisenpaideveloper@gmail.com',
     url='https://github.com/kisenpai/kisenpai',
     download_url='https://github.com/kisenpai/kisenpai/archive/0.8.tar.gz',
-    keywords=['feature engineering', 'feature selection', 'feature extraction', 'feature transformation'],
+    keywords=['features engineering', 'features selection', 'features usecase', 'features transformation'],
     install_requires=[  # I get to this in a second
-        'pandas',
+        'pandas', 'jellyfish'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
