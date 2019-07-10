@@ -6,18 +6,18 @@ with open("README.md", "r") as readme_file:
 setup(
     name='kisenpai',
     packages=['kisenpai'],
-    version='0.8',
+    version='0.8.1',
     license='gpl-3.0',
     description='A simple framework for features engineering',
     long_description=readme,
     long_description_content_type="text/markdown",
-    author='Pascal Zoleko',
+    author='Pascal Zoleko, Ted Dibanda',
     author_email='kisenpaideveloper@gmail.com',
     url='https://github.com/kisenpai/kisenpai',
     download_url='https://github.com/kisenpai/kisenpai/archive/0.8.tar.gz',
     keywords=['features engineering', 'features selection', 'features usecase', 'features transformation'],
     install_requires=[  # I get to this in a second
-        'pandas', 'jellyfish'
+        'pandas', 'jellyfish', 'python-dateutil'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
