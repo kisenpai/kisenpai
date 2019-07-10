@@ -34,7 +34,3 @@ class DateFeatureExtractor:
 
     def get_linear_features(self) -> pd.DataFrame:
         return pd.concat([self.get_linear_day(), self.get_linear_month(), self.get_year()], axis=1, sort=False)
-
-
-d = DateFeatureExtractor(pd.DataFrame(["The 1st June 2009", "3rd of April 1999"], columns=["date"]), "date", True, True)
-print(d.dates)
