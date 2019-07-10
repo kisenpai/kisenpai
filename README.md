@@ -5,7 +5,9 @@ This library is intended to ease the process of feature engineering. Most tasks 
 ## Features
 Kisenpai is essentially a wrapper for many useful common functions. (Note that the constructors always take a dataframe as input). Here are some of the features:
 
-#### Date Feature Extraction
+### Usecase Features
+
+#### Date - Feature Extraction
 1. Extract all date features from date string
 ```python
 from features.usecase.date.date import DateFeatureExtractor
@@ -43,3 +45,9 @@ features = dfe.get_features()
 0  18    08  2004
 1  23    12  2019
 ```
+
+### Text Features
+
+#### Spelling Correction - Feature Transformation
+1. Auto correction of english text
+// To be continued ...
