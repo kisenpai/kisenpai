@@ -16,3 +16,8 @@ df = pd.DataFrame(["The 1st of June 1994", "2nd June 2000"], columns=[column_nam
 dfe = DateFeatureExtractor(df, column_name, day_first=False, fuzzy_with_tokens=True)
 features = dfe.get_features()
 ``` 
+```shell
+  day month  year
+0  01    06  1994
+1  02    06  2000
+```
