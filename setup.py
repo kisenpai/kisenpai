@@ -17,7 +17,7 @@ setup(
     download_url='https://github.com/kisenpai/kisenpai/archive/0.8.tar.gz',
     keywords=['features engineering', 'features selection', 'features usecase', 'features transformation'],
     install_requires=[  # I get to this in a second
-        'pandas', 'jellyfish', 'python-dateutil'
+        'pandas', 'jellyfish', 'python-dateutil', 'pyspellchecker'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
