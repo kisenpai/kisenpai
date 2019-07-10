@@ -1,15 +1,18 @@
 import pandas as pd
+from dateutil import parser
 
 
 class DateFeatureExtractor:
 
-    def __init__(self, dates: pd.DataFrame):
-        """
-        :param dates: The dates should have the format dd.mm.yyyy for example 01.03.1999
-        where the "." delimiter can be replaced by any character.
-        This class assumes dates contains no missing value.
-        """
-        self.dates = dates
+    def __init__(self, data: pd.DataFrame, column_name: str, day_first=False, fuzzy_with_tokens=False):
+        self.dates = data[column_name]
+        self.dates = self.dates.apply(lambda date: self.__parse_date(date, day_first, fuzzy_with_tokens))
+
+    def __parse_date(self, date: str, day_first=False, fuzzy_with_tokens=False) -> str:
+        datetime = parser.parse(date, dayfirst=day_first, fuzzy_with_tokens=fuzzy_with_tokens)
+        if fuzzy_with_tokens:
+            return datetime[0].strftime("%d.%m.%Y")
+        return datetime.strftime("%d.%m.%Y")
 
     def get_features(self) -> pd.DataFrame:
         return self.get_linear_features()
