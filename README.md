@@ -32,7 +32,7 @@ features = dfe.get_linear_month()
 0    03
 1    04
 ```
-3. Extract features from date string (German like format - with day first)
+3. Extract features from date string (German like format - with day first %d.%m.%Y)
 ```python
 df = pd.DataFrame(["18.08.2004", "23.12.2019"], columns=[column_name])
 dfe = DateFeatureExtractor(df, column_name, day_first=True, fuzzy_with_tokens=False)
