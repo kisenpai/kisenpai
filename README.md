@@ -76,3 +76,15 @@ features = dfe.get_correct_spellings()
 0  good morning my name is Kisenpai
 1                  I em good enough
 ```
+#### String Comparison - Feature Extraction
+Get the distances (hamming, levenstein, jaro and jaro-winkler) from one string to all other string in the dataframe column. We use the jellyfish library
+```python
+column_name = "text"
+df = pd.DataFrame(["word", "wordy"], columns=[column_name])
+
+dfe = StringComparison(df, column_name)
+features = dfe.get_jaro_distances("wardi")
+```shell
+   distance
+0  0.783333
+1  0.866667
