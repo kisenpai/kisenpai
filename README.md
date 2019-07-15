@@ -74,5 +74,5 @@ features = dfe.get_correct_spellings()
 ```shell
                                text
 0  good morning my name is Kisenpai
-1                  I em nod perfect
+1                  I em good enough
 ```
