@@ -70,7 +70,6 @@ df = pd.DataFrame(["good mornin my namme is Kisenpai", "I em nod perfekt"], colu
 
 dfe = SpellingCorrector(df, column_name, language="en", distance=1)
 features = dfe.get_correct_spellings()
-print(pd.DataFrame(features))
 ```
 ```shell
                                text
