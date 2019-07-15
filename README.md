@@ -66,7 +66,7 @@ features = dfe.get_correct_spellings()
 ```
 2. Auto correction of english text.
 ```python
-df = pd.DataFrame(["good mornin my namme is Kisenpai", "I em nod perfekt"], columns=[column_name])
+df = pd.DataFrame(["good mornin my namme is Kisenpai", "I em goud enough"], columns=[column_name])
 
 dfe = SpellingCorrector(df, column_name, language="en", distance=1)
 features = dfe.get_correct_spellings()
