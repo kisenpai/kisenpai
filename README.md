@@ -64,3 +64,16 @@ features = dfe.get_correct_spellings()
 0  bonjour
 1    merci
 ```
+2. Auto correction of english text.
+```python
+df = pd.DataFrame(["good mornin my namme is Kisenpai", "I em nod perfekt"], columns=[column_name])
+
+dfe = SpellingCorrector(df, column_name, language="en", distance=1)
+features = dfe.get_correct_spellings()
+print(pd.DataFrame(features))
+```
+```shell
+                               text
+0  good morning my name is Kisenpai
+1                  I em nod perfect
+```
