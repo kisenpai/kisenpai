@@ -83,7 +83,7 @@ column_name = "text"
 df = pd.DataFrame(["word", "wordy"], columns=[column_name])
 
 dfe = StringComparison(df, column_name)
-features = dfe.get_jaro_distances("wardi")
+features = dfe.get_jaro_distances("wardy")
 ```
 ```shell
    distance
