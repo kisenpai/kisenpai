@@ -9,7 +9,7 @@ class SpellingCorrector:
         self.__spell_checker = SpellChecker(language=language, local_dictionary=local_dictionary, distance=distance)
 
     def get_correct_spellings(self):
-        return self.__strings.apply(lambda text: self.__auto_correct_text(text))
+        return pd.DataFrame(self.__strings.apply(lambda text: self.__auto_correct_text(text)))
 
     def __auto_correct_text(self, text: str):
         corrected_text = ""
