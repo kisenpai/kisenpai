@@ -17,6 +17,7 @@ column_name = "date"
 df = pd.DataFrame(["The 1st of June 1994", "2nd June 2000"], columns=[column_name])
 dfe = DateFeatureExtractor(df, column_name, day_first=False, fuzzy_with_tokens=True)
 features = dfe.get_features()
+print(features.head())
 ``` 
 ```shell
   day month  year
@@ -49,5 +50,17 @@ features = dfe.get_features()
 ### Text Features
 
 #### Spelling Correction - Feature Transformation
-1. Auto correction of english text
-// To be continued ...
+We use pyspellcheker for spelling corrections. It supports English, Spanish, German, French, and Portuguese.
+1. Auto correction of french text
+```python
+column_name = "text"
+df = pd.DataFrame(["bonjor", "mersi"], columns=[column_name])
+
+dfe = SpellingCorrector(df, column_name, language="fr")
+features = dfe.get_correct_spellings()
+```
+```shell
+      text
+0  bonjour
+1    merci
+```
