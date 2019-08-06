@@ -1,5 +1,6 @@
 import random
 import pandas as pd
+from tensorboardX import SummaryWriter
 from deap import base, creator, tools
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -33,6 +34,7 @@ class FeatureSelector:
         return self.__train_eval_function(individual),
 
     def get_selected_features(self) -> list:
+        writer = SummaryWriter(comment="-cartpole")
         population = self.__toolbox.population(n=self.__population_size)
         fitnesses = list(map(self.__toolbox.evaluate, population))
         best_individual = []
@@ -92,7 +94,10 @@ class FeatureSelector:
             print("   Avg %s" % mean)
             print("   Std %s" % std)
             print("   Best Individual [:>] ", best_individual)
+            writer.add_scalar("max-accuracy", max(fits), generations)
+            writer.add_text("chromosome", str(best_individual), generations)
 
+        writer.close()
         return best_individual
 
 
@@ -103,7 +108,6 @@ data0.drop(columns=["Status", "ID"], inplace=True)
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 import numpy as np
-
 
 def fake(individual):
     selected_features = []
