@@ -146,5 +146,7 @@ This function was intitally passed to the FeatureSelector's constructor. The **g
 
 Here is a screenshot of one of the experiments we conducted with only 100 generation. You can see how the accuracy increases generation. It seems like it is stuck in a local-optima, but during previous tests, we reached 0.85 accuracy with 300 generations.
 
+Our intention here, is just to stress the fact that better results can be obtained when training with the right features.
+
 
 ![alt text](https://github.com/kisenpai/kisenpai/blob/feature-selector/kisenpai/features/selector/Screenshot%202019-08-06%20at%2022.30.48.png "Performance Evolution")
