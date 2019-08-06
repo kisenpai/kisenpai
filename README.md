@@ -143,4 +143,8 @@ def train_evaluate(selected_features: list) -> float:
     return np.mean(labels_predicted == y_valid)
 ```
 This function was intitally passed to the FeatureSelector's constructor. The **get_selected_features()** returns a new dataset with selected columns (features) only.
+
+Here is a screenshot of one of the experiments we conducted with only 100 generation. You can see how the accuracy increases generation. It seems like it is stuck in a local-optima, but during previous tests, we reached 0.85 accuracy with 300 generations.
+
+
 ![alt text](https://github.com/kisenpai/kisenpai/blob/feature-selector/kisenpai/features/selector/Screenshot%202019-08-06%20at%2022.30.48.png "Performance Evolution")
