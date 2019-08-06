@@ -2,6 +2,12 @@
 
 This library is intended to ease the process of feature engineering. Most tasks like feature extraction, selection and transformation are usually done over and over again across projects. Not only this creates duplicate code, but it is also time consuming to recopy those useful functions over and over again. With **kisenpai**, you now have a central library that handles diverse feature engineering tasks.
 
+## Installation
+```shell
+pip install kisenpai
+```
+Not all features are currently released on pypi. To use the latest features, clone the project.
+
 ## Features
 Kisenpai is essentially a wrapper for many useful common functions. (Note that the constructors always take a dataframe as input). Here are some of the features:
 
@@ -90,3 +96,49 @@ features = dfe.get_jaro_distances("wardy")
 0  0.783333
 1  0.866667
 ```
+
+## Feature Selection
+We implemented feature selection with a genetic algorithm. Our implmentation is a tweaked version of DEAP's (A python library for evolutionary systems) solution for the One-Max (all-ones) problem. Here is how you can use Kisenpai's feature selector.
+```python
+# 1. Import required libraries
+import pandas as pd
+from kisenpai.features.selector.feature_selector import FeatureSelector
+
+# 2. Load your data and seperate the features from the labels or targets
+data = pd.read_csv("data.csv", encoding="utf-8", delimiter=",")
+labels = data["Target"]
+data.drop(columns=["Target], inplace=True)
+
+# 3. Define the training function
+def train_evaluate(selected_features) -> float:
+  # see comments below
+  return metric
+
+print(data.head())
+fs = FeatureSelector(data, train_evaluate)
+features = fs.get_selected_features()
+print(features.head())
+```
+Now about the **train_evaluate(selected_features) -> float** function.
+- The feature selector finds the best features by training a different models based on different features.
+- It then evolves towards the best features, hence the best model.
+- For this to work, we need the **train_evaluate(selected_features) -> float**
+- This should be your training-evaluation function. It takes as input the features sent by the feature selector and returns an evaluation metric (For example, accuracy, F1-score, recall etc.)
+- The objective is to maximise this metric. Hence, the current version will not work for metrics that have to be minimised e.g loss metrics.
+- Don't forget to set your random state before training. This is required for the evolution to work properly.
+- Below is an example of such a function. We train, our model based on the features received, and return the accuracy.
+
+```python
+# Import required libraries
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+def train_evaluate(selected_features: list) -> float:
+    subset_data = data[selected_features]
+    X_train, X_valid, y_train, y_valid = train_test_split(subset_data, labels, test_size=0.20, random_state=42)
+    classifier = GaussianNB().fit(X_train, y_train)
+    labels_predicted = classifier.predict(X_valid)
+    return np.mean(labels_predicted == y_valid)
+```
+This function was intitally passed to the FeatureSelector's constructor. The **get_selected_features()** returns a new data set with selected columns or features only.
