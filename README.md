@@ -98,6 +98,7 @@ features = dfe.get_jaro_distances("wardy")
 ```
 
 ## Feature Selection
+#### With Genetic Algorithms
 We implemented feature selection with a genetic algorithm. Our implmentation is a tweaked version of DEAP's (A python library for evolutionary systems) solution for the One-Max (all-ones) problem. Here is how you can use Kisenpai's feature selector.
 ```python
 # 1. Import required libraries
