@@ -112,7 +112,7 @@ data.drop(columns=["Target], inplace=True)
 # 3. Define the training function
 def train_evaluate(selected_features) -> float:
   # see comments below
-  return metric
+  return some_metric
 
 print(data.head())
 fs = FeatureSelector(data, train_evaluate)
@@ -122,8 +122,8 @@ print(features.head())
 Now about the **train_evaluate(selected_features) -> float** function.
 - The feature selector finds the best features by training a different models based on different features.
 - It then evolves towards the best features, hence the best model.
-- For this to work, we need the **train_evaluate(selected_features) -> float**
-- This should be your training-evaluation function. It takes as input the features sent by the feature selector and returns an evaluation metric (For example, accuracy, F1-score, recall etc.)
+- For this to work, we need the **train_evaluate(selected_features) -> float** function.
+- This should be your training-evaluation function. It takes as input the features sent by the feature selector and returns an evaluation metric (For example, accuracy, F1-score, recall etc.).
 - The objective is to maximise this metric. Hence, the current version will not work for metrics that have to be minimised e.g loss metrics.
 - Don't forget to set your random state before training. This is required for the evolution to work properly.
 - Below is an example of such a function. We train, our model based on the features received, and return the accuracy.
@@ -141,4 +141,4 @@ def train_evaluate(selected_features: list) -> float:
     labels_predicted = classifier.predict(X_valid)
     return np.mean(labels_predicted == y_valid)
 ```
-This function was intitally passed to the FeatureSelector's constructor. The **get_selected_features()** returns a new data set with selected columns or features only.
+This function was intitally passed to the FeatureSelector's constructor. The **get_selected_features()** returns a new dataset with selected columns (features) only.
