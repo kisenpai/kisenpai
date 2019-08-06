@@ -96,9 +96,9 @@ class FeatureSelector:
         return best_individual
 
 
-data0 = pd.read_csv("wine.csv", encoding="utf-8", delimiter=";")
-label = data0["quality"]
-data0.drop(columns=["quality"], inplace=True)
+data0 = pd.read_csv("wine.csv", encoding="utf-8", delimiter=",")
+label = data0["Status"]
+data0.drop(columns=["Status", "ID"], inplace=True)
 
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
