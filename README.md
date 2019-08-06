@@ -143,4 +143,4 @@ def train_evaluate(selected_features: list) -> float:
     return np.mean(labels_predicted == y_valid)
 ```
 This function was intitally passed to the FeatureSelector's constructor. The **get_selected_features()** returns a new dataset with selected columns (features) only.
-[logo]: https://github.com/kisenpai/kisenpai/blob/feature-selector/kisenpai/features/selector/Screenshot%202019-08-06%20at%2022.30.48.png
+![alt text](https://github.com/kisenpai/kisenpai/blob/feature-selector/kisenpai/features/selector/Screenshot%202019-08-06%20at%2022.30.48.png "Performance Evolution")
