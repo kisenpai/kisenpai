@@ -1,6 +1,5 @@
 import random
 import pandas as pd
-from tensorboardX import SummaryWriter
 from deap import base, creator, tools
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -9,11 +8,10 @@ creator.create("Individual", list, fitness=creator.FitnessMax)
 
 class FeatureSelector:
 
-    def __init__(self, data: pd.DataFrame, train_eval_function, goal=1.0, max_generations=1000,
+    def __init__(self, data: pd.DataFrame, train_eval_function, goal=1.0, max_generations=100,
                  init_population=100, crossover=tools.cxTwoPoint, crossover_prob=0.5, attr_mutation_prob=0.05,
                  individual_mutation_prob=0.2):
         self.__original_features = data.columns
-        self.__data = data
         self.__goal = goal
         self.__max_generations = max_generations
         self.__population_size = init_population
@@ -31,10 +29,13 @@ class FeatureSelector:
         self.__toolbox.register("select", tools.selTournament, tournsize=3)
 
     def __evaluate_individual(self, individual) -> tuple:
-        return self.__train_eval_function(individual),
+        selected_features = []
+        for activated, feature in zip(individual, self.__original_features):
+            if activated == 1:
+                selected_features.append(feature)
+        return self.__train_eval_function(selected_features),
 
     def get_selected_features(self) -> list:
-        writer = SummaryWriter(comment="-cartpole")
         population = self.__toolbox.population(n=self.__population_size)
         fitnesses = list(map(self.__toolbox.evaluate, population))
         best_individual = []
@@ -94,32 +95,5 @@ class FeatureSelector:
             print("   Avg %s" % mean)
             print("   Std %s" % std)
             print("   Best Individual [:>] ", best_individual)
-            writer.add_scalar("max-accuracy", max(fits), generations)
-            writer.add_text("chromosome", str(best_individual), generations)
 
-        writer.close()
         return best_individual
-
-
-data0 = pd.read_csv("wine.csv", encoding="utf-8", delimiter=",")
-label = data0["Status"]
-data0.drop(columns=["Status", "ID"], inplace=True)
-
-from sklearn.naive_bayes import GaussianNB
-from sklearn.model_selection import train_test_split
-import numpy as np
-
-def fake(individual):
-    selected_features = []
-    for activation, feature in zip(individual, data0.columns):
-        if activation == 1:
-            selected_features.append(feature)
-    new_data = data0[selected_features]
-    X_train, X_valid, y_train, y_valid = train_test_split(new_data, label, test_size=0.20, random_state=42)
-    classifier = GaussianNB().fit(X_train, y_train)
-    labels_predicted = classifier.predict(X_valid)
-    return np.mean(labels_predicted == y_valid)
-
-
-fs = FeatureSelector(data0, fake)
-fs.get_selected_features()
