@@ -144,7 +144,7 @@ def train_evaluate(selected_features: list) -> float:
 ```
 This function was intitally passed to the FeatureSelector's constructor. The **get_selected_features()** returns a new dataset with selected columns (features) only.
 
-Here is a screenshot of one of the experiments we conducted with only 100 generation. You can see how the accuracy increases generation. It seems like it is stuck in a local-optima, but during previous tests, we reached 0.85 accuracy with 300 generations.
+Here is a screenshot of one of the experiments we conducted with only 100 generation. You can see how the accuracy increases with new generations. It seems like it is stuck in a local-optima (0.83), but during previous tests, we reached 0.85 accuracy with 300 generations.
 
 Our intention here, is just to stress the fact that better results can be obtained when training with the right features.
 
