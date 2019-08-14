@@ -8,16 +8,16 @@ setup(
     packages=['kisenpai'],
     version='0.8.1',
     license='gpl-3.0',
-    description='A simple framework for features engineering',
+    description='A simple framework for features engineering and statistical analysis using graphs ',
     long_description=readme,
     long_description_content_type="text/markdown",
-    author='Pascal Zoleko, Ted Dibanda',
+    author='Pascal Zoleko, Berenger Dibanda',
     author_email='kisenpaideveloper@gmail.com',
     url='https://github.com/kisenpai/kisenpai',
     download_url='https://github.com/kisenpai/kisenpai/archive/0.8.tar.gz',
     keywords=['features engineering', 'features selection', 'features usecase', 'features transformation'],
     install_requires=[  # I get to this in a second
-        'pandas', 'jellyfish', 'python-dateutil', 'pyspellchecker', 'deap'
+        'pandas', 'jellyfish', 'python-dateutil', 'pyspellchecker', 'deap', 'numpy', 'matplotlib'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
